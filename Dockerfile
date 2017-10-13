@@ -6,8 +6,10 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY basic.conf /etc/nginx/basic.conf
 COPY mime.types /etc/nginx/mime.types
 RUN mkdir /etc/nginx/ssl
-COPY default /etc/nginx/sites-enabled/default
+COPY default /etc/nginx/sites-available/default
 COPY default-ssl /etc/nginx/sites-available/default-ssl
+RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+RUN ln -s /etc/nginx/sites-available/default-ssl /etc/nginx/sites-enabled/
 COPY directive-only /etc/nginx/directive-only
 COPY location /etc/nginx/location
 
